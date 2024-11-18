@@ -32,7 +32,7 @@ This project implements a User Notification API using **NestJS**. It allows mana
 
 ```bash
 
-npm 
+npm install
 
 ```
 ---
