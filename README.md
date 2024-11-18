@@ -70,28 +70,6 @@ Access the API locally at http://localhost:3000.
 | DELETE | `/api/preferences/:userId`   | Delete user preferences by `userId`.|
 
 
-
-# User Notification API
-
-## Error Handling
-
-Our API uses robust error-handling mechanisms to ensure reliable and meaningful responses for all scenarios. Below are the key aspects of error handling implemented in the application:
-
-1. **Centralized Error Filter:**
-   All exceptions are caught and processed through a global `HttpExceptionFilter` to provide uniform error responses.
-
-2. **Validation Errors:**
-   Invalid inputs are handled using class-validator decorators. Detailed error messages are returned for missing or invalid fields.
-
-   Example Response:
-   ```json
-   {
-     "statusCode": 400,
-     "message": ["userId must be a string", "email must be an email"],
-     "error": "Bad Request"
-   }
-
-
 ## **Notification Management**
 
 | Method | Endpoint                              | Description                           |
@@ -122,6 +100,27 @@ Our API uses robust error-handling mechanisms to ensure reliable and meaningful 
 
 
 ---
+
+# User Notification API
+
+## Error Handling
+
+Our API uses robust error-handling mechanisms to ensure reliable and meaningful responses for all scenarios. Below are the key aspects of error handling implemented in the application:
+
+1. **Centralized Error Filter:**
+   All exceptions are caught and processed through a global `HttpExceptionFilter` to provide uniform error responses.
+
+2. **Validation Errors:**
+   Invalid inputs are handled using class-validator decorators. Detailed error messages are returned for missing or invalid fields.
+
+   Example Response:
+   ```json
+   {
+     "statusCode": 400,
+     "message": ["userId must be a string", "email must be an email"],
+     "error": "Bad Request"
+   }
+   
 ## 404 Errors: If a resource is not found, a NotFoundException is thrown.
 
 ## Example Response:
@@ -199,8 +198,8 @@ Tests:       7 passed, 7 total
 
 ## Example Requests and Responses
 
-1. Create User Preference
-Request:
+## 1. Create User Preference
+## Request:
 ```
 bash
 
@@ -224,10 +223,10 @@ Content-Type: application/json
 }
 ```
 
-Response:
+## Response:
 
 ```json
-Copy code
+
 {
   "success": true,
   "message": "User preference created successfully",
@@ -251,9 +250,9 @@ Copy code
 }
 ```
 
-2. Send Notification
+## 2. Send Notification
 
-Request:
+## Request:
 
 ```bash
 
@@ -270,7 +269,7 @@ Content-Type: application/json
 }
 ```
 
-Response:
+## Response:
 
 ```json
 
@@ -293,14 +292,14 @@ Response:
 
 ## 3. Fetch Notification Logs
 
-## ** Request: **
+##  Request: 
 
 ```bash
 
 GET /api/notifications/testUser123/logs
 ```
 
-## ** Response: **
+##  Response: 
 
 ```json
 
