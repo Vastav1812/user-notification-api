@@ -69,6 +69,29 @@ Access the API locally at http://localhost:3000.
 | PATCH  | `/api/preferences/:userId`   | Update user preferences by `userId`.|
 | DELETE | `/api/preferences/:userId`   | Delete user preferences by `userId`.|
 
+
+
+# User Notification API
+
+## Error Handling
+
+Our API uses robust error-handling mechanisms to ensure reliable and meaningful responses for all scenarios. Below are the key aspects of error handling implemented in the application:
+
+1. **Centralized Error Filter:**
+   All exceptions are caught and processed through a global `HttpExceptionFilter` to provide uniform error responses.
+
+2. **Validation Errors:**
+   Invalid inputs are handled using class-validator decorators. Detailed error messages are returned for missing or invalid fields.
+
+   Example Response:
+   ```json
+   {
+     "statusCode": 400,
+     "message": ["userId must be a string", "email must be an email"],
+     "error": "Bad Request"
+   }
+
+
 ## **Notification Management**
 
 | Method | Endpoint                              | Description                           |
