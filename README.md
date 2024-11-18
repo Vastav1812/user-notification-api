@@ -121,3 +121,191 @@ Our API uses robust error-handling mechanisms to ensure reliable and meaningful 
 | Performance Monitoring   | Setup for application performance tracking. | Pending |
 
 
+
+404 Errors: If a resource is not found, a NotFoundException is thrown.
+
+Example Response:
+
+json
+Copy code
+{
+  "statusCode": 404,
+  "message": "User preference not found",
+  "error": "Not Found"
+}
+Duplicate Resource Handling: Attempting to create a resource that already exists results in a ConflictException.
+
+Example Response:
+
+json
+Copy code
+{
+  "statusCode": 409,
+  "message": "Notification with similar content already exists",
+  "error": "Conflict"
+}
+Unhandled Errors: Unhandled exceptions return a generic 500 response.
+
+Example Response:
+
+json
+Copy code
+{
+  "statusCode": 500,
+  "message": "Internal server error"
+}
+Testing
+The project is equipped with end-to-end tests to verify functionality and ensure reliability. Below is an overview of the testing process:
+
+Key Features Tested
+User Preferences:
+Create, Read, Update, and Delete operations.
+Notifications:
+Sending notifications.
+Fetching logs and statistics.
+Test Framework
+Jest: Used for writing and running test cases.
+Supertest: For making HTTP requests and validating API responses.
+How to Run Tests
+Install dependencies:
+bash
+Copy code
+npm install
+Run the end-to-end tests:
+bash
+Copy code
+npm run test:e2e
+Example Test Output
+sql
+Copy code
+PASS  test/app.e2e-spec.ts
+  API Endpoints (e2e)
+    User Preferences
+      ✓ POST /api/preferences - Create a new user preference
+      ✓ GET /api/preferences/:userId - Get user preference by userId
+      ✓ PATCH /api/preferences/:userId - Update user preference by userId
+      ✓ DELETE /api/preferences/:userId - Delete user preference by userId
+    Notification Management
+      ✓ POST /api/notifications/send - Send a notification
+      ✓ GET /api/notifications/:userId/logs - Get notification logs
+      ✓ GET /api/notifications/stats - Get notification stats
+
+Test Suites: 1 passed, 1 total
+Tests:       7 passed, 7 total
+Example Requests and Responses
+1. Create User Preference
+Request:
+
+bash
+Copy code
+POST /api/preferences
+Content-Type: application/json
+{
+  "userId": "testUser123",
+  "email": "test@example.com",
+  "preferences": {
+    "marketing": true,
+    "newsletter": false,
+    "updates": true,
+    "frequency": "weekly",
+    "channels": {
+      "email": true,
+      "sms": false,
+      "push": true
+    }
+  },
+  "timezone": "America/New_York"
+}
+Response:
+
+json
+Copy code
+{
+  "success": true,
+  "message": "User preference created successfully",
+  "data": {
+    "userId": "testUser123",
+    "email": "test@example.com",
+    "preferences": {
+      "marketing": true,
+      "newsletter": false,
+      "updates": true,
+      "frequency": "weekly",
+      "channels": {
+        "email": true,
+        "sms": false,
+        "push": true
+      }
+    },
+    "timezone": "America/New_York"
+  },
+  "timestamp": "2024-11-17T20:00:00Z"
+}
+2. Send Notification
+Request:
+
+bash
+Copy code
+POST /api/notifications/send
+Content-Type: application/json
+{
+  "userId": "testUser123",
+  "type": "marketing",
+  "channel": "email",
+  "content": {
+    "subject": "Test Notification",
+    "body": "This is a test notification."
+  }
+}
+Response:
+
+```json
+
+{
+  "success": true,
+  "message": "Notification sent successfully",
+  "data": {
+    "userId": "testUser123",
+    "type": "marketing",
+    "channel": "email",
+    "metadata": {
+      "subject": "Test Notification",
+      "body": "This is a test notification."
+    },
+    "status": "sent"
+  },
+  "timestamp": "2024-11-17T20:01:00Z"
+}
+```
+
+## 3. Fetch Notification Logs
+
+## ** Request: **
+
+```bash
+
+GET /api/notifications/testUser123/logs
+```
+
+## ** Response: **
+
+```json
+
+{
+  "success": true,
+  "message": "Notification logs fetched successfully",
+  "data": [
+    {
+      "userId": "testUser123",
+      "type": "marketing",
+      "channel": "email",
+      "metadata": {
+        "subject": "Test Notification",
+        "body": "This is a test notification."
+      },
+      "status": "sent"
+    }
+  ],
+  "timestamp": "2024-11-17T20:02:00Z"
+}
+
